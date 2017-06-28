@@ -1,0 +1,22 @@
+---
+version: "2"
+services: 
+  aerospike: 
+    container_name: aerospike-polypus
+    image: brunneis/aerospike-centos
+    ports: 
+      - 3000:3000
+    volumes: 
+      - ./aerospike.conf:/etc/aerospike/aerospike.conf
+  hbase: 
+    container_name: hbase-polypus
+    entrypoint: >
+      bash -c "start-hbase.sh && sleep 10 &&
+      echo \"create 'posts',
+      {NAME => 'polypus_primary', COMPRESSION => 'SNAPPY', BLOCKSIZE => '16777216'},
+      {NAME => 'polypus_secondary', COMPRESSION => 'SNAPPY', BLOCKSIZE => '16777216'}\"
+      | hbase shell -n
+      && bash --login -i"
+    image: "brunneis/hbase-x86-64-base:1.2.6"
+    network_mode: host
+    tty: true
