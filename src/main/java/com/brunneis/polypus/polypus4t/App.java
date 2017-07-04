@@ -17,19 +17,19 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus;
+package com.brunneis.polypus.polypus4t;
 
-import com.brunneis.polypus.conf.Conf;
-import com.brunneis.polypus.conf.ConfLoadException;
-import com.brunneis.polypus.conf.HBaseConf;
-import com.brunneis.polypus.threads.StreamingMiner;
-import com.brunneis.polypus.threads.ScraperMiner;
+import com.brunneis.polypus.polypus4t.conf.Conf;
+import com.brunneis.polypus.polypus4t.conf.ConfLoadException;
+import com.brunneis.polypus.polypus4t.conf.HBaseConf;
+import com.brunneis.polypus.polypus4t.threads.StreamingMiner;
+import com.brunneis.polypus.polypus4t.threads.ScraperMiner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static com.brunneis.polypus.conf.Conf.DB_PERSISTENCE;
-import com.brunneis.polypus.dao.DigitalPostSingletonFactoryDAO;
+import static com.brunneis.polypus.polypus4t.conf.Conf.DB_PERSISTENCE;
+import com.brunneis.polypus.polypus4t.dao.DigitalPostSingletonFactoryDAO;
 
 public class App {
 
@@ -53,9 +53,9 @@ public class App {
             case Conf.HBASE:
                 logger.log(Level.INFO, "DB_NAME = {0}", Conf.DB_PERSISTENCE
                         .value().NAME.value());
-                logger.log(Level.INFO, "HBASE_CF_SPEED = {0}", ((HBaseConf) DB_PERSISTENCE
+                logger.log(Level.INFO, "HBASE_PRIMARY_FAMILY = {0}", ((HBaseConf) DB_PERSISTENCE
                         .value()).hbasePrimaryFamily.value());
-                logger.log(Level.INFO, "HBASE_CF_EXTRA = {0}", ((HBaseConf) DB_PERSISTENCE
+                logger.log(Level.INFO, "HBASE_SECONDARY_FAMILY = {0}", ((HBaseConf) DB_PERSISTENCE
                         .value()).hbaseSecondaryFamily.value());
                 logger.log(Level.INFO, "HBASE_ZOOKEEPER_PORT = {0}", ((HBaseConf) DB_PERSISTENCE.
                         value()).hbaseZookeeperPort.value());

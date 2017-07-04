@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.dao;
+package com.brunneis.polypus.polypus4t.dao;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

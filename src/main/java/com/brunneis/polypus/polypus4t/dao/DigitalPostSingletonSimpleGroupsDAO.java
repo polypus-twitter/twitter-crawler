@@ -17,9 +17,9 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.dao;
+package com.brunneis.polypus.polypus4t.dao;
 
-import com.brunneis.polypus.vo.DigitalPost;
+import com.brunneis.polypus.polypus4t.vo.DigitalPost;
 import com.brunneis.sg.exceptions.BadItemException;
 import com.brunneis.sg.exceptions.DuplicateNameException;
 import com.brunneis.sg.exceptions.FileParsingException;

@@ -17,19 +17,36 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.conf;
+package com.brunneis.polypus.polypus4t.vo;
 
 /**
  *
  * @author brunneis
  */
-public class ConfLoadException extends Exception {
+public class BasicDigitalPostContent {
 
-    public ConfLoadException() {
+    private byte[] rowkey;
+    private String content;
+
+    public BasicDigitalPostContent(byte[] id, String content) {
+        this.rowkey = id;
+        this.content = content;
     }
 
-    public ConfLoadException(String message) {
-        super(message);
+    public byte[] getRowkey() {
+        return rowkey;
+    }
+
+    public void setRowkey(byte[] rowkey) {
+        this.rowkey = rowkey;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }

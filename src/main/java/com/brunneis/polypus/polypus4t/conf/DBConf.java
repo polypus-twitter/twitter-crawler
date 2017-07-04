@@ -17,29 +17,17 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.dao;
+package com.brunneis.polypus.polypus4t.conf;
 
-import com.brunneis.polypus.conf.Conf;
+import com.brunneis.locker.Locker;
 
 /**
  *
  * @author brunneis
  */
-public class DigitalPostSingletonFactoryDAO {
+public class DBConf {
 
-    public synchronized static DigitalPostDAO getDigitalPostDAOinstance(Integer type) {
-        switch (type) {
-            case Conf.HBASE_AEROSPIKE:
-                return (DigitalPostDAO) DigitalPostSingletonHBaseAerospikeDAO.getInstance();
-            case Conf.SG:
-                return (DigitalPostDAO) DigitalPostSingletonSimpleGroupsDAO.getInstance();
-            default:
-                return null;
-        }
-    }
-
-    public synchronized static DigitalPostDAO getDigitalPostDAOinstance() {
-        return getDigitalPostDAOinstance(Conf.STORE_MODE.value());
-    }
+    public final Locker<Integer> CURRENT = new Locker<>();
+    public final Locker<String> NAME = new Locker<>();
 
 }

@@ -19,6 +19,8 @@
  */
 package com.brunneis.locker;
 
+import com.brunneis.polypus.polypus4t.conf.ConfLoadException;
+
 /**
  *
  * @author brunneis
@@ -55,6 +57,10 @@ public class Locker<T> {
 
     public final T value() {
         return this.value;
+    }
+
+    public final boolean isNull() {
+        return this.value == null;
     }
 
 }

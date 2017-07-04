@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.conf;
+package com.brunneis.polypus.polypus4t.conf;
 
 import com.brunneis.locker.Locker;
 
@@ -25,9 +25,11 @@ import com.brunneis.locker.Locker;
  *
  * @author brunneis
  */
-public class AerospikeConf extends DBConf {
+public class HBaseConf extends DBConf {
 
-    public final Locker<String> host = new Locker<>();
-    public final Locker<Integer> port = new Locker<>();
+    public final Locker<String> hbaseZookeeperQuorum = new Locker<>();
+    public final Locker<String> hbaseZookeeperPort = new Locker<>();
+    public final Locker<String> hbasePrimaryFamily = new Locker<>();
+    public final Locker<String> hbaseSecondaryFamily = new Locker<>();
 
 }

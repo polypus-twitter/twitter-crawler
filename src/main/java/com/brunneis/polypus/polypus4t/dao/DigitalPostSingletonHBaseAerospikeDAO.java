@@ -17,9 +17,9 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.dao;
+package com.brunneis.polypus.polypus4t.dao;
 
-import com.brunneis.polypus.vo.DigitalPost;
+import com.brunneis.polypus.polypus4t.vo.DigitalPost;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,10 +29,10 @@ import com.aerospike.client.Bin;
 import com.aerospike.client.Key;
 import com.aerospike.client.policy.RecordExistsAction;
 import com.aerospike.client.policy.WritePolicy;
-import com.brunneis.polypus.conf.AerospikeConf;
-import com.brunneis.polypus.conf.Conf;
-import static com.brunneis.polypus.conf.Conf.DB_PERSISTENCE;
-import com.brunneis.polypus.conf.HBaseConf;
+import com.brunneis.polypus.polypus4t.conf.AerospikeConf;
+import com.brunneis.polypus.polypus4t.conf.Conf;
+import static com.brunneis.polypus.polypus4t.conf.Conf.DB_PERSISTENCE;
+import com.brunneis.polypus.polypus4t.conf.HBaseConf;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -179,14 +179,13 @@ public final class DigitalPostSingletonHBaseAerospikeDAO implements DigitalPostD
         wpolicyProcessedPosts.sleepBetweenRetries = 50;
 
         // Buffer filter
-        buffer.keySet().forEach((String key) -> {
+        buffer.keySet().forEach((key) -> {
             Key keyToHash = new Key(
                     // Source as namespace (twttr)
                     "polypus_" + buffer.get(key).getSource(),
                     "ids", // set
                     key
             );
-
             boolean postExists = false;
             try {
                 postExists = aerospikeClient.exists(null, keyToHash);
@@ -194,7 +193,6 @@ public final class DigitalPostSingletonHBaseAerospikeDAO implements DigitalPostD
                 logger.log(Level.SEVERE, null, ex);
                 this.reconnectAerospike();
             }
-
             // Check new posts
             if (!postExists) {
                 try {
@@ -238,6 +236,7 @@ public final class DigitalPostSingletonHBaseAerospikeDAO implements DigitalPostD
 
                 // Keep the post for batch insert in HBase
                 Put put = new Put(Bytes.toBytes(buffer.get(key).getId()));
+
                 put.addColumn(Bytes.toBytes(this.hbasePrimaryFamily),
                         Bytes.toBytes("content"),
                         Bytes.toBytes(buffer.get(key).getContent()));
@@ -260,7 +259,6 @@ public final class DigitalPostSingletonHBaseAerospikeDAO implements DigitalPostD
                         Bytes.toBytes("author_id"),
                         Bytes.toBytes(buffer.get(key).getAuthorId()));
                 puts.add(put);
-
             }
         });
 

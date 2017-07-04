@@ -17,9 +17,9 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.vo;
+package com.brunneis.polypus.polypus4t.vo;
 
-import com.brunneis.polypus.dao.RowKeyHelper;
+import com.brunneis.polypus.polypus4t.dao.RowKeyHelper;
 
 /**
  * Esta clase se corresponde con el contenido almacenado en HBase

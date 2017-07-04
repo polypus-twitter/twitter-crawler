@@ -17,19 +17,21 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.conf;
+package com.brunneis.polypus.polypus4t.dao;
 
-import com.brunneis.locker.Locker;
+import com.brunneis.polypus.polypus4t.vo.DigitalPost;
+import java.util.HashMap;
 
 /**
  *
  * @author brunneis
  */
-public class HBaseConf extends DBConf {
+public interface DigitalPostDAO {
 
-    public final Locker<String> hbaseZookeeperQuorum = new Locker<>();
-    public final Locker<String> hbaseZookeeperPort = new Locker<>();
-    public final Locker<String> hbasePrimaryFamily = new Locker<>();
-    public final Locker<String> hbaseSecondaryFamily = new Locker<>();
+    public void dumpBuffer(HashMap<String, DigitalPost> buffer);
+
+    public void connect();
+
+    public void disconnect();
 
 }

@@ -17,10 +17,10 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.threads;
+package com.brunneis.polypus.polypus4t.threads;
 
-import com.brunneis.polypus.conf.Conf;
-import com.brunneis.polypus.vo.DigitalPost;
+import com.brunneis.polypus.polypus4t.conf.Conf;
+import com.brunneis.polypus.polypus4t.vo.DigitalPost;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;

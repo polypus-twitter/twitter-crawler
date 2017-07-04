@@ -17,21 +17,19 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.dao;
-
-import com.brunneis.polypus.vo.DigitalPost;
-import java.util.HashMap;
+package com.brunneis.polypus.polypus4t.conf;
 
 /**
  *
  * @author brunneis
  */
-public interface DigitalPostDAO {
+public class ConfLoadException extends Exception {
 
-    public void dumpBuffer(HashMap<String, DigitalPost> buffer);
+    public ConfLoadException() {
+    }
 
-    public void connect();
-
-    public void disconnect();
+    public ConfLoadException(String message) {
+        super(message);
+    }
 
 }

@@ -17,36 +17,17 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.vo;
+package com.brunneis.polypus.polypus4t.conf;
+
+import com.brunneis.locker.Locker;
 
 /**
  *
  * @author brunneis
  */
-public class BasicDigitalPostContent {
+public class AerospikeConf extends DBConf {
 
-    private byte[] rowkey;
-    private String content;
-
-    public BasicDigitalPostContent(byte[] id, String content) {
-        this.rowkey = id;
-        this.content = content;
-    }
-
-    public byte[] getRowkey() {
-        return rowkey;
-    }
-
-    public void setRowkey(byte[] rowkey) {
-        this.rowkey = rowkey;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public final Locker<String> host = new Locker<>();
+    public final Locker<Integer> port = new Locker<>();
 
 }

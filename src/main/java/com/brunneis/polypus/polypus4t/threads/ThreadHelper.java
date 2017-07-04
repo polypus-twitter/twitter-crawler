@@ -17,12 +17,12 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.brunneis.polypus.threads;
+package com.brunneis.polypus.polypus4t.threads;
 
-import com.brunneis.polypus.conf.Conf;
-import com.brunneis.polypus.dao.DigitalPostDAO;
-import com.brunneis.polypus.dao.DigitalPostSingletonFactoryDAO;
-import com.brunneis.polypus.vo.DigitalPost;
+import com.brunneis.polypus.polypus4t.conf.Conf;
+import com.brunneis.polypus.polypus4t.dao.DigitalPostDAO;
+import com.brunneis.polypus.polypus4t.dao.DigitalPostSingletonFactoryDAO;
+import com.brunneis.polypus.polypus4t.vo.DigitalPost;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
@@ -45,9 +46,12 @@ import org.w3c.css.sac.ErrorHandler;
 public class ThreadHelper {
 
     private final DigitalPostDAO dpdao;
+    private Logger logger;
 
     public ThreadHelper() {
         this.dpdao = DigitalPostSingletonFactoryDAO.getDigitalPostDAOinstance();
+        logger = Logger.getLogger(ScraperMiner.class.getName());
+        logger.setLevel(Conf.LOGGER_LEVEL.value());
     }
 
     public void dumpBuffer(HashMap<String, DigitalPost> buffer) {
@@ -103,8 +107,8 @@ public class ThreadHelper {
         try {
             String url = "https://twitter.com/" + nickname;
             page = webClient.getPage(url);
-        } catch (FailingHttpStatusCodeException | IOException e) {
-            System.out.println(e.getMessage());
+        } catch (FailingHttpStatusCodeException | IOException ex) {
+            logger.log(Level.SEVERE, null, ex);
             return 1;
         }
 
@@ -113,7 +117,7 @@ public class ThreadHelper {
             userFollowersList
                     = page.getByXPath("//a[@data-nav='followers']/span");
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            logger.log(Level.SEVERE, null, ex);
             return 1;
         }
 
@@ -152,8 +156,11 @@ public class ThreadHelper {
     }
 
     public void printDigitalPost(DigitalPost tweet) {
-        System.out.println("[" + tweet.getLanguage() + "]@"
-                + tweet.getAuthorNickname() + ": " + tweet.getContent());
+        logger.log(Level.INFO,
+                "[{0}]@{1}: {2}",
+                new Object[]{tweet.getLanguage(),
+                    tweet.getAuthorNickname(),
+                    tweet.getContent()});
     }
 
 }
